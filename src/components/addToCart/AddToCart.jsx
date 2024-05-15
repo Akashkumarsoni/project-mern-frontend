@@ -7,7 +7,7 @@ const AddToCart = ({product}) => {
   const { cart, addToCart, removeFromCart } = useCart();
 
   const itemInCart = cart[product.id];
-  const quantity = itemInCart ? itemInCart.stock : 0;
+  const quantity = itemInCart ? itemInCart.quantity : 0;
 
   console.log(cart);
   return (

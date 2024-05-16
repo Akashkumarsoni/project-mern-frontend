@@ -9,12 +9,10 @@ import Signup from '../pages/signup/Signup';
 import Login from '../pages/login/Login';
 import urlConfig from '../utils/urlConfig';
 import useAuth from '../context/auth/useAuth';
+import Payment from '../pages/payment/Payment';
 const AppRoutes = () => {
 
   const {data: categories, error, isLoading } = useFetchData('https://fakestoreapi.com/products/categories', []);
-
-  console.log(categories);
-
   return (
       <>
       
@@ -30,6 +28,9 @@ const AppRoutes = () => {
                 <Route path='*' element={<NotFound />} />
                 <Route path="/signup" element={<Signup />}></Route>
                 <Route path="/login" element={<Login />}></Route>
+                <Route path="/payment" element={<Payment />}></Route>
+
+                
             </Routes>
         </Router>
       </>

@@ -28,13 +28,8 @@ function Signup() {
                password,
                confirmPassword 
             };
-
-            console.log(userDetails);
-
             const resp = await axios.post(urlConfig.SIGNUP_URL, userDetails);
             const data = resp.data;
-            console.log(data);
-
             if(data) {
                 setName("");
                 setEmail("");
@@ -43,7 +38,6 @@ function Signup() {
                 navigate('/login')
             }
         }catch(err){
-            console.log(err.message);
             setErrMsg("User is not resigtered successfully!");
             setTimeout(()=>{
                 setErrMsg("");

@@ -2,7 +2,7 @@ import { useState } from "react";
 import AuthContext from "./AuthContext";
 export const AuthProvider = ({ children }) => {
     const [user, setAuth] = useState({});
-
+    console.log("user", user)
     return (
         <AuthContext.Provider value={{ user, setAuth }}>
             {children}

@@ -8,18 +8,16 @@ const ContextProvider = ({children}) => {
 
     const addToCart = (product) => {
         const updatedCart = {...cartState};
-
-        if(updatedCart[product.id]) {
-            updatedCart[product.id].quantity+=1;
+        if(updatedCart[product._id]) {
+            updatedCart[product._id].quantity+=1;
         } else {
-            updatedCart[product.id] = {...product, quantity: 1};
+            updatedCart[product._id] = {...product, quantity: 1};
         }
 
         setTotalQuantity(totalQuantity+1);
 
         setCartState(updatedCart);
     }
-
     const removeFromCart = (productId) => {
 
         // create a shallow copy

@@ -26,20 +26,20 @@ function Login() {
                email,
                password,
             };
-
-            console.log(userDetails);
-
             const resp = await axios.post(urlConfig.LOGIN_URL, userDetails);
             const data = resp.data;
-            // console.log(data);
-            console.log(setAuth);
-
             if(data.status === "success") {
+                sessionStorage.setItem("loggedIn","true");
+                const checkFromCart= sessionStorage.getItem("checkout");
                 setEmail("");
                 setPassword("");
-                navigate('/');
-                console.log(data);
                 setAuth(data);
+                if(checkFromCart == "true") {
+                    navigate('/cart');
+                }else{
+                    navigate('/');
+                }
+                
             }
         }catch(err){
             console.log(err.message);

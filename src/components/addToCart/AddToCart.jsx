@@ -6,14 +6,14 @@ const AddToCart = ({product}) => {
 
   const { cart, addToCart, removeFromCart } = useCart();
 
-  const itemInCart = cart[product.id];
+  const itemInCart = cart[product?.id];
   const quantity = itemInCart ? itemInCart.quantity : 0;
   return (
     <div className="add-to-cart">
       {
         itemInCart ? (
           <>
-            <div onClick={()=>{removeFromCart(product.id)}} className="add remove">
+            <div onClick={()=>{removeFromCart(product?.id)}} className="add remove">
               -
             </div>
             <div className="quantity">{quantity}</div>

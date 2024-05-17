@@ -7,7 +7,7 @@ const Product = ({ product }) => (
     <div className="product-details">
       <div className="product-title">{product.name}</div>
       <div className="buy-item">
-        <div className="product-price">Price: ${product.price}</div>
+        <div className="product-price">Price: ₹{product.price}</div>
         <AddToCart product={product} />
       </div>
     </div>

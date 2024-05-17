@@ -13,6 +13,7 @@ import Payment from '../pages/payment/Payment';
 const AppRoutes = () => {
 
   const {data: categories, error, isLoading } = useFetchData('https://fakestoreapi.com/products/categories', []);
+  // ["electronics", "men's clothing", "women's clothing", "jewellery"];
   return (
       <>
       

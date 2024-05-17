@@ -12,7 +12,7 @@ const CartItem = ({ cartData }) => {
         </div>
         <div className="cart-item-info">
             <h3 className="cart-item-name">{title}</h3>
-            <p className="cart-item-price">${price.toFixed(2)}</p>
+            <p className="cart-item-price">₹{price.toFixed(2)}</p>
         </div>
     </div>
     {<span className="cart-item-quantity">{quantity}</span>}

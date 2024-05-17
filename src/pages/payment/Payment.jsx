@@ -1,8 +1,11 @@
-import { useState } from 'react'
 import Axios from 'axios';
+import "./payment.css";
+import { useEffect } from 'react';
+import { useCart } from '../../context/cart/useCart';
+import shortid from 'shortid';
 
-function Payment() {
-
+function Payment(props) {
+  const { cart } = useCart();
   const loadScript = () => {
     return new Promise((resolve, reject)=>{
       const script = document.createElement('script');
@@ -12,13 +15,19 @@ function Payment() {
       document.body.appendChild(script);
     })
   }
-
+  console.log("cartData" ,cart)
   const displayRazorpay = async() =>{
+    const netTotalPrice = Object.values(cart).reduce(
+      (total, item) => total + item.price * item.quantity,
+      0
+  );
     await loadScript();
-    const resp = await Axios.post('http://localhost:3000/checkout', {method: 'post'});
-    console.log(resp.data); 
+    const data = {
+      amount: netTotalPrice*100,
+      currency: "INR",
+    };
+    const resp = await Axios.post('http://localhost:3000/payment/checkout', data);
     const {id, amount, currency } = resp.data.data;
-    console.log(amount);
     let options = {
         "key": 'rzp_test_RRv9RrX1Y1mqqZ', // Enter the Key ID generated from the Dashboard
         "amount": amount.toString(), // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
@@ -27,8 +36,15 @@ function Payment() {
         "description": "Test Transaction",
         "image": "https://example.com/your_logo",
         "order_id": id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
-        "handler": function (response){
-          console.log("response ",response)
+        "handler": async function (response){
+          console.log(response);
+          const headers = {
+            'Content-Type': 'application/json',
+            'x-razorpay-signature': response.razorpay_signature, // Example of an authorization header
+          };
+          await Axios.post('http://localhost:3000/payment/verify', {
+            "order_id" : response.razorpay_order_id
+          },{headers})
             // alert(response.razorpay_payment_id);
             // alert(response.razorpay_order_id);
             // alert(response.razorpay_signature);
@@ -45,21 +61,21 @@ function Payment() {
             "color": "#3399cc"
         }
     };
-
     var razorpayInst = new Razorpay(options);
-
     razorpayInst.open();
-
-
   }
-
-
-
+  useEffect(()=>{
+    if(props.goToPayment) {
+      displayRazorpay()
+    }
+  },[props.goToPayment]);
   return (
     <>
-      <button id="rzp-btn" onClick={displayRazorpay}>Pay with Razorpay</button>
+      <button className="cart-net-total-paybtn"  onClick={props.checkout}>
+        Proceed to Pay
+      </button>
     </>
-  )
+  );
 }
 
 export default Payment

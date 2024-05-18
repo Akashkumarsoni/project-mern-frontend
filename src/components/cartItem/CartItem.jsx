@@ -32,7 +32,7 @@ const CartItem = ({ cartData }) => {
         </button>
     </div> */}
     <div className="cart-item-total">
-        <p className="cart-item-total-price">${totalPrice.toFixed(2)}</p>
+        <p className="cart-item-total-price">₹{totalPrice.toFixed(2)}</p>
     </div>
     </div>  
   );

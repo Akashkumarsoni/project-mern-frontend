@@ -19,9 +19,7 @@ function Login() {
        // write your logic here
 
           try{
-
             setLoading(true);
-
             let userDetails= {
                email,
                password,
@@ -30,6 +28,8 @@ function Login() {
             const data = resp.data;
             if(data.status === "success") {
                 sessionStorage.setItem("loggedIn","true");
+                sessionStorage.setItem("email",email);
+
                 const checkFromCart= sessionStorage.getItem("checkout");
                 setEmail("");
                 setPassword("");

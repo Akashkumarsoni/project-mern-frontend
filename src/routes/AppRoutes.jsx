@@ -10,28 +10,27 @@ import Login from '../pages/login/Login';
 import urlConfig from '../utils/urlConfig';
 import useAuth from '../context/auth/useAuth';
 import Payment from '../pages/payment/Payment';
+import OrderItems from '../pages/orders/Order';
 const AppRoutes = () => {
 
-  const {data: categories, error, isLoading } = useFetchData('https://fakestoreapi.com/products/categories', []);
+  const {data: categories, error, isLoading } = useFetchData('http://localhost:3000/api/product/categories', []);
   // ["electronics", "men's clothing", "women's clothing", "jewellery"];
   return (
       <>
       
       {/* <Loader /> */}
         <Router>
-          
             {/* { user && user.length ? <Header categories={categories.data} isLoading={isLoading}/> : <></>}  */}
-            <Header categories={categories} isLoading={isLoading}/>
+            <Header categories={categories} isLoading={false}/>
             <Routes>
                 <Route path='/' element={<ProductListing />} />
                 <Route path='/cart' element={<CartItems />} />
+                <Route path="/orders" element={<OrderItems />} />
                 <Route  path='/products/:categoryName' element={<ProductListing />}/>
                 <Route path='*' element={<NotFound />} />
                 <Route path="/signup" element={<Signup />}></Route>
                 <Route path="/login" element={<Login />}></Route>
                 <Route path="/payment" element={<Payment />}></Route>
-
-                
             </Routes>
         </Router>
       </>

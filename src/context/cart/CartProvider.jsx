@@ -39,7 +39,9 @@ const ContextProvider = ({children}) => {
         cart: cartState,
         totalQuantity,
         addToCart,
-        removeFromCart
+        removeFromCart,
+        setCartState,
+        setTotalQuantity
     };
 
     return (

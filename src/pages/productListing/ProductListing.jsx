@@ -11,7 +11,7 @@ const ProductListing = () => {
     const { categoryName } = useParams();
 
     const url = categoryName
-    ? `https://fakestoreapi.com/products/category/${categoryName}`
+    ? `http://localhost:3000/api/product/${categoryName}`
     : `http://localhost:3000/api/product`;
 
     const {data: products, error, isLoading} = useFetchData(url, []);

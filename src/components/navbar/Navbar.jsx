@@ -21,7 +21,7 @@ const Navbar = ({categories, isLoading}) => {
                         return (
                             <li className='nav-item' key={idx+1}>
                                 <NavLink 
-                                    to={item=="Home" ? "" :(item=="orders" ? "/orders" :`/products/${item}`)}
+                                    to={`/products/${item}`}
                                     className="nav-link">{item}
                                 </NavLink>
                             </li>

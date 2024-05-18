@@ -3,6 +3,7 @@ import CartItem from "../../components/cartItem/CartItem";
 import Axios from 'axios';
 import './order.css';
 import { useNavigate } from "react-router-dom";
+import BASE_URL from "../../utils/urlConfig";
 
 const OrderItems = () => {
   const [orderItems,setOrderItems] = useState([]);
@@ -10,12 +11,12 @@ const OrderItems = () => {
   const navigate = useNavigate();
     useEffect(async()=>{
       if(sessionStorage.getItem("email")){
-      const res = await Axios.get('http://localhost:3000/orders')
+      const res = await Axios.get(`${BASE_URL}/orders`)
       console.log("data ",res.data.data)
       setOrderItems(res.data.data.filter((e)=>e.user == sessionStorage.getItem("email")))}
       else {
         alert("Please login first!")
-        navigate("/login")
+        navigate("/login");
       }
     },[])
     function getSum(total, num) {
@@ -37,6 +38,7 @@ const OrderItems = () => {
         <p className="cart-net-total-label">Total Price</p>
         <p className="cart-net-total-label">₹{item.product.reduce(getSum,0)}</p>
       </div>
+      <div className="cart-net-line"></div>
       </ul>
       })}
 

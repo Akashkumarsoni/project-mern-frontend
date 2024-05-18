@@ -5,7 +5,7 @@ const Header = ({ categories, isLoading}) => {
     return (
         <>
           <header className="header">
-            <Navbar categories= {["Home","electronics", "men's clothing", "women's clothing", "jewellery"]} isLoading={false}/>
+            <Navbar categories= {["Home","electronics", "men's clothing", "women's clothing", "jewellery","orders"]} isLoading={false}/>
           </header> 
         </>
     )

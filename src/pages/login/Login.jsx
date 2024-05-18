@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import "./login.css"
-import urlConfig from '../../utils/urlConfig.js';
 import axios from "axios";
 import useAuth from '../../context/auth/useAuth.js';
+import BASE_URL from '../../utils/urlConfig.js';
 
 function Login() {
     /*****data for you backend***/
@@ -24,7 +24,7 @@ function Login() {
                email,
                password,
             };
-            const resp = await axios.post(urlConfig.LOGIN_URL, userDetails);
+            const resp = await axios.post(`${BASE_URL}/api/auth/login`, userDetails);
             const data = resp.data;
             if(data.status === "success") {
                 sessionStorage.setItem("loggedIn","true");

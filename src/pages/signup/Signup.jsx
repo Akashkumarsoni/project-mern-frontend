@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import urlConfig from '../../utils/urlConfig.js';
 import { Link, useNavigate } from "react-router-dom";
+import BASE_URL from '../../utils/urlConfig.js';
 
 function Signup() {
     /*************state variables*************/
@@ -28,7 +29,7 @@ function Signup() {
                password,
                confirmPassword 
             };
-            const resp = await axios.post(urlConfig.SIGNUP_URL, userDetails);
+            const resp = await axios.post(`${BASE_URL}/api/auth/login`, userDetails);
             const data = resp.data;
             if(data) {
                 setName("");

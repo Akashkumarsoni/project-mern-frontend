@@ -3,6 +3,7 @@ import "./payment.css";
 import { useEffect } from 'react';
 import { useCart } from '../../context/cart/useCart';
 import { useNavigate } from 'react-router-dom';
+import BASE_URL from '../../utils/urlConfig';
 
 function Payment(props) {
   const { cart, setCartState, setTotalQuantity,totalQuantity } = useCart();
@@ -26,7 +27,7 @@ function Payment(props) {
       amount: netTotalPrice*100,
       currency: "INR",
     };
-    const resp = await Axios.post(`http://localhost:3000/checkout`, data);
+    const resp = await Axios.post(`${BASE_URL}/checkout`, data);
     const {id, amount, currency } = resp.data.data;
     let options = {
         "key": 'rzp_test_RRv9RrX1Y1mqqZ', // Enter the Key ID generated from the Dashboard
@@ -46,7 +47,7 @@ function Payment(props) {
             'x-razorpay-signature': response.razorpay_signature, // Example of an authorization header
           };
           navigate("/orders");
-          await Axios.post('http://localhost:3000/verify', {
+          await Axios.post(`${BASE_URL}/verify`, {
             "order_id" : response.razorpay_order_id,
              "products" :cart,
              "date": Date.now(),

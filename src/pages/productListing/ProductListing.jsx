@@ -5,14 +5,15 @@ import Product from '../../components/product/Product';
 import Loader from '../../components/loader';
 import './productListing.css';
 import Pagination from '../../components/pagination/Pagination';
+import BASE_URL from '../../utils/urlConfig';
 
 const ProductListing = () => {
 
     const { categoryName } = useParams();
 
     const url = categoryName
-    ? `http://localhost:3000/api/product/${categoryName}`
-    : `http://localhost:3000/api/product`;
+    ? `${BASE_URL}/api/product/${categoryName}`
+    : `${BASE_URL}/api/product`;
 
     const {data: products, error, isLoading} = useFetchData(url, []);
     const itemsPerPage = 3;

@@ -9,4 +9,4 @@ const  urlConfig = {
 }
 
 
-export default urlConfig;
+export default BASE_URL;

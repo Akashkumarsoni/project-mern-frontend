@@ -7,13 +7,12 @@ import ProductListing from '../pages/productListing/ProductListing';
 import CartItems from '../pages/cartItems/CartItems';
 import Signup from '../pages/signup/Signup';
 import Login from '../pages/login/Login';
-import urlConfig from '../utils/urlConfig';
-import useAuth from '../context/auth/useAuth';
 import Payment from '../pages/payment/Payment';
 import OrderItems from '../pages/orders/Order';
+import BASE_URL from '../utils/urlConfig';
 const AppRoutes = () => {
 
-  const {data: categories, error, isLoading } = useFetchData('http://localhost:3000/api/product/categories', []);
+  const {data: categories, error, isLoading } = useFetchData(`${BASE_URL}/api/product/categories`, []);
   // ["electronics", "men's clothing", "women's clothing", "jewellery"];
   return (
       <>
